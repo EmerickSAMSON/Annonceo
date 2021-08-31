@@ -1,0 +1,40 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	{{ parent() }}
+	| Modification de l'annonce
+{% endblock %}
+
+{% block h1 %}
+	Modification de l'annonce
+{% endblock %}
+
+{% block body %}
+
+	{{ form_start(formAnnonce) }}
+
+	<div class="col-md-6 mx-auto mt-2">
+
+		<div class="row justify-content-between">
+
+			<div class="col-md-6 my-2">{{ form_row(formAnnonce.titre)}}</div>
+			<div class="col-md-6 my-2">{{ form_row(formAnnonce.description_courte)}}</div>
+			<div class="col-md-12 my-2">{{ form_row(formAnnonce.description_longue)}}</div>
+			<div class="col-md-6 my-2">{{ form_row(formAnnonce.prix)}}</div>
+			<div class="col-md-6 my-2">{{ form_row(formAnnonce.ville)}}</div>
+			<div class="col-md-6 my-2">{{ form_row(formAnnonce.adresse)}}</div>
+			<div class="col-md-6 my-2">{{ form_row(formAnnonce.cp)}}</div>
+			<div class="col-md-6 my-5">{{ form_row(formAnnonce.image)}}</div>
+
+			<input type="submit" value="Modifier" class="btn btn-dark mt-5">
+
+
+		</div>
+
+
+	</div>
+
+	{{ form_end(formAnnonce) }}
+
+
+{% endblock %}

@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ parent() }}
+	| Annonce
+{% endblock %}
+
+{% block h1 %}
+	Gestion des annonces
+{% endblock %}
+
+{% block body %}
+
+	{% for notification in app.flashes('success') %}
+		<div class="text-center text-light bg-success mx-auto col-md-6 p-4">
+			{{notification}}
+		</div>
+	{% endfor %}
+
+	<div class="row justify-content-center">
+
+		<div class="col-md-11">
+
+			<a href="{{path('annonce_ajouter')}}" class="btn btn-info">Ajouter une annonce</a>
+
+
+			{% if annonces %}
+
+				<table class="table table-hover table-bordered table-striped text-center mt-3 bg-primary">
+
+					<thead class="bg-primary text-white text-center text-capitalize">
+
+						<tr>
+							<th>id_annonce</th>
+							<th>titre</th>
+							<th>description courte</th>
+							<th>description longue</th>
+							<th>prix</th>
+							<th>photo</th>
+							<th>pays</th>
+							<th>ville</th>
+							<th>adresse</th>
+							<th>cp</th>
+							<th>membre</th>
+							<th>catégorie</th>
+							<th>date d'enregistrement</th>
+							<th>action</th>
+						</tr>
+					</thead>
+
+					<tbody class="bg-light text-dark">
+						{% for annonce in annonces %}
+
+							<tr>
+								<td>{{ annonce.id}}</td>
+								<td>{{annonce.titre}}</td>
+								<td>{{annonce.descriptionCourte}}</td>
+								<td>{{annonce.descriptionLongue}}</td>
+								<td>{{annonce.prix}}€</td>
+								<td>
+									{% if annonce.image %}
+
+										<img src="{{ asset('images/imagesUpload/' ~ annonce.image) }}" alt="" style="width:200px">
+
+										{% else %}
+
+										<img src="{{asset('images/imageDefault.png')}}" alt="" style="width:50px">
+
+									{% endif %}
+								</td>
+								<td>France</td>
+								<td>{{annonce.ville}}</td>
+								<td>{{annonce.adresse}}</td>
+								<td>{{annonce.cp}}</td>
+								<td>membre</td>
+								<td>categorie</td>
+								<td>{{annonce.dateAt|date("d/m/Y")}}</td>
+								<td>
+									<a href="{{path('annonce_modifier', {'id': annonce.id}) }}"><img src="{{ asset('images/update.png')}}" alt=""></a>
+									<a href="{{path('annonce_supprimer', {'id': annonce.id}) }}"><img src="{{ asset('images/delete.png')}}" alt=""></a>
+								</td>
+							</tr>
+
+						{% endfor %}
+
+					{% else %}
+
+						<h3 class="text-center text-uppercase">il n'y a aucune annonces de posté</h3>
+
+					{% endif %}
+
+
+				</tbody>
+
+			</table>
+
+
+		</div>
+
+	</div>
+
+
+{% endblock %}
