@@ -1,3 +1,61 @@
 {% extends 'base.html.twig' %}
 
 
+{% block title %}
+	{{ parent() }}
+	| Annonce
+{% endblock %}
+
+{% block h1 %}
+	Nouvelles annonces
+{% endblock %}
+
+{% block body %}
+
+	<div class="col-md-10 text-center mx-auto">
+
+		<div class="row justify-content-between">
+
+			{% for annonce in annonces %}
+
+				<div class="col-md-3">
+
+					<div class="card" style="width: 18rem;">
+
+						<div class="mx-auto my-2">
+
+							{% if annonce.image %}
+
+								<img src="{{ asset('images/imagesUpload/' ~ annonce.image) }}" alt="" style="width:200px">
+
+							{% else %}
+
+								<img src="{{asset('images/imageDefault.png')}}" alt="" style="width:50px">
+
+							{% endif %}
+						</div>
+
+						<div class="card-body">
+							<h5 class="card-title">{{annonce.titre}}</h5>
+							<p class="card-text">{{annonce.descriptionCourte}}</p>
+						</div>
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item">{{annonce.prix}} €</li>
+
+						</ul>
+						<div class="card-body">
+							<a href="#" class="card-link">Voir l'annonce</a>
+						</div>
+
+					</div>
+
+				</div>
+
+
+			{% endfor %}
+
+		</div>
+	</div>
+
+
+{% endblock %}

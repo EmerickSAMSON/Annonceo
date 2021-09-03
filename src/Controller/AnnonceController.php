@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Annonce;
+use App\Entity\User;
 use App\Form\AnnonceType;
 use App\Repository\AnnonceRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AnnonceController extends AbstractController
 {
     /**
-     * @Route("/annonce", name="annonce_afficher")
+     * @Route("/admin/annonce", name="annonce_afficher")
      */
     public function annonce_afficher(AnnonceRepository $repoAnnonce)
     {
@@ -33,17 +34,25 @@ class AnnonceController extends AbstractController
 
         $annonce = new Annonce;
 
+        $user = $this->getUser();
+
+        $membre = $annonce->setUser($user);
+
+        
         $form = $this->createForm(AnnonceType::class, $annonce, array('ajouter' => true));
-
+        
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
 
             $image = $form->get('image')->getData();
 
             if ($image) {
+                
+                // dd($image);
 
-                $nomImage = date('YmdHis') . "-" . $image->getClientOriginalName();
+                $nomImage = date('YmdHis') . "-" . $image->guessExtension();
+
 
                 $image->move(
                     $this->getParameter("image_annonce"),
@@ -64,7 +73,7 @@ class AnnonceController extends AbstractController
                 'Votre annonce à bien été posté'
             );
 
-            return $this->redirectToRoute('annonce_afficher');
+            return $this->redirectToRoute('profil');
         }
 
 
@@ -140,5 +149,14 @@ class AnnonceController extends AbstractController
         );
 
         return $this->redirectToRoute('annonce_afficher');
+    }
+
+
+    /**
+     * @Route("/annonce/details/{id<\d+>}", name="RouteName")
+     */
+    public function FunctionName(): Response
+    {
+        return $this->render('$0.html.twig', []);
     }
 }

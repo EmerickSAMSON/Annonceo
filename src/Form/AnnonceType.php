@@ -3,13 +3,17 @@
 namespace App\Form;
 
 use App\Entity\Annonce;
+use App\Entity\Categorie;
+use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class AnnonceType extends AbstractType
 {
@@ -36,7 +40,7 @@ class AnnonceType extends AbstractType
                     ]
                 ])
 
-                ->add('description_longue', TextType::class, [
+                ->add('description_longue', TextareaType::class, [
                     'label' => "Détails de l'annonce",
                     'required' => false,
                     'attr' => [
@@ -65,7 +69,9 @@ class AnnonceType extends AbstractType
                 ])
 
                 ->add('image', FileType::class, [
+                    'label' => false,
                     'required' => false,
+                    // 'multiple'=> true,
                     'mapped' => false
 
                 ])
@@ -86,7 +92,15 @@ class AnnonceType extends AbstractType
                         'placeholder' => "Votre ville",
                         'class' => 'col-md-12'
                     ]
-                ]);
+                ])
+
+                ->add('categorie', EntityType::class, [
+                    'class' => Categorie::class,
+                    'choice_label' => "titre"
+                ])
+                ;
+                
+                ;
         } elseif ($options['modifier']) {
             $builder
                 ->add('titre', TextType::class, [
@@ -107,7 +121,7 @@ class AnnonceType extends AbstractType
                     ]
                 ])
 
-                ->add('description_longue', TextType::class, [
+                ->add('description_longue', TextareaType::class, [
                     'label' => "Description de l'annonce",
                     'required' => false,
                     'attr' => [

@@ -1,0 +1,129 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ parent() }}
+	| Mon profil
+{% endblock %}
+
+{% block h1 %}
+	Mon Profil
+{% endblock %}
+
+{% block body %}
+
+	<div class="col-md-8 mx-auto">
+
+		<div class="row">
+
+			<div class="col-md-12">
+
+				<label for="name">Prénom :</label>
+				{{app.user.prenom}}
+
+			</div>
+
+			<div class="col-md-12">
+
+				<label for="firstname">Nom :</label>
+				{{app.user.nom}}
+
+			</div>
+
+
+			<div class="col-md-12">
+
+				<label for="pseudo">Pseudo :</label>
+				{{app.user.pseudo}}
+
+			</div>
+
+			<div class="col-md-12">
+
+				<label for="email">Email :</label>
+				{{app.user.email}}
+
+			</div>
+
+
+			<div class="col-md-12">
+
+				<label for="adresse">Adresse :</label>
+				{{app.user.adresse}}
+
+			</div>
+
+			<div class="col-md-12">
+
+				<label for="ville">Ville :</label>
+				{{app.user.ville}}
+
+			</div>
+
+
+			<div class="col-md-12">
+
+				<label for="cp">CP :</label>
+				{{app.user.cp}}
+
+			</div>
+
+			<div class="col-md-12">
+
+				<label for="telephone">Téléphone :</label>
+				{{app.user.telephone}}
+
+			</div>
+
+			<div class="col-md-12">
+
+				<label for="civilite">Civilité :</label>
+				{{app.user.civilite}}
+
+			</div>
+
+
+			<div>
+				<a class="btn btn-success m-5" href="{{ path('annonce_ajouter') }}">Ajouter une annonce</a>
+			</div>
+
+			<div class="col-md-6">
+
+				<h3>Annonce de
+					{{app.user.prenom}}
+					{{ app.user.nom }}</h3>
+
+			</div>
+
+			{% for annonce in app.user.annonces %}
+				<div class="row">
+
+					<div class="col-md-2">titre :</div>
+					<div class="col-md-3">{{annonce.titre }}</div>
+					{% if annonce.image %}
+
+						<img src="{{ asset('images/imagesUpload/' ~ annonce.image) }}" alt="" style="width:200px">
+
+					{% else %}
+
+						<img src="{{asset('images/imageDefault.png')}}" alt="" style="width:50px">
+
+					{% endif %}
+
+					<div class="col-md-1">
+						<a href="{{path('annonce_modifier', {'id': annonce.id}) }}"><img src="{{ asset('images/update.png')}}" alt=""></a>
+					</div>
+					<div class="col-md-1">
+						<a href="{{path('annonce_supprimer', {'id': annonce.id}) }}"><img src="{{ asset('images/delete.png')}}" alt=""></a>
+					</div>
+
+
+				</div>
+			{% endfor %}
+
+
+		</div>
+
+	</div>
+
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	{{ parent() }}
+	| Inscription
+{% endblock %}
+
+{% block h1 %}
+	Inscription
+{% endblock %}
+
+{% block body %}
+
+	{{ form_start(formUser) }}
+
+
+	<div class="col-md-2 mx-auto mt-2">
+
+		<div class="row">
+
+			<div class="col-md-12 my-2">{{ form_row(formUser.pseudo) }}</div>
+			<div class="col-md-12 my-2">{{ form_row(formUser.email) }}</div>
+
+			<div class="col-md-12">
+				<div class="col-md-12 my-2">{{ form_row(formUser.password) }}</div>
+
+			</div>
+			<div class="col-md-12 my-2">{{ form_row(formUser.nom) }}</div>
+			<div class="col-md-12 my-2">{{ form_row(formUser.prenom) }}</div>
+			<div class="col-md-12 my-2">{{ form_row(formUser.adresse) }}</div>
+			<div class="col-md-12 my-2">{{ form_row(formUser.ville) }}</div>
+			<div class="col-md-12 my-2">{{ form_row(formUser.cp) }}</div>
+			<div class="col-md-12 my-2">{{ form_row(formUser.telephone) }}</div>
+			<div class="col-md-12 my-2">{{ form_row(formUser.civilite) }}</div>
+
+
+			<div class="col-md-12 mx-auto"><input class="btn btn-outline-success my-4 text-center" type="submit" value="Créer"></div>
+		</div>
+
+
+	</div>
+
+	{{ form_end(formUser) }}
+
+{% endblock %}

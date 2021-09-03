@@ -1,0 +1,77 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	{{ parent() }}
+	| Gestion des catégories
+{% endblock %}
+
+{% block h1 %}
+	Gestion des catégories
+{% endblock %}
+
+{% block body %}
+
+	<div class="row justify-content-center">
+
+		<div class="col-md-10 ">
+
+			{% for notification in app.flashes('success') %}
+				<div class="col-md-8 bg-success text-light mx-auto text-center p-4 rounded shadow">
+					{{notification}}
+				</div>
+			{% endfor %}
+
+
+			<a href="{{path('category_ajouter')}}" class="btn btn-info">Ajouter une catégorie</a>
+
+			{% if categories %}
+
+				<table class="table table-hover table-bordered table-striped text-center mt-3 bg-primary">
+
+					<thead class="bg-primary text-white text-center text-capitalize">
+
+						<tr>
+
+							<th>Id</th>
+							<th>Titre</th>
+							<th>Mots Clés</th>
+							<th>Action</th>
+
+
+						</tr>
+
+					</thead>
+
+					<tbody class="bg-light text-dark text-center">
+
+						{% for category in categories %}
+							<tr>
+
+
+								<td>{{ category.id }}</td>
+								<td>{{ category.titre }}</td>
+								<td>{{ category.motscles }}</td>
+								<td>
+									<a href="{{path('category_modifier', {'id': category.id}) }}"><img src="{{ asset('images/update.png')}}" alt=""></a>
+									<a href="{{path('category_supprimer', {'id': category.id}) }}"><img src="{{ asset('images/delete.png')}}" alt=""></a>
+								</td>
+
+
+							</tr>
+						{% endfor %}
+
+					</tbody>
+
+				</table>
+
+			{% else %}
+
+				<div class="text-center my-5 text-warning text-uppercase">Il n'y a aucune catégorie pour le moment</div>
+
+			{% endif %}
+		</div>
+
+
+	</div>
+
+{% endblock %}

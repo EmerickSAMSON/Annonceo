@@ -1,0 +1,37 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	{{ parent() }}
+	| Ajouter une catégorie
+{% endblock %}
+
+{% block h1 %}
+    Ajouter une catégorie
+{% endblock %}
+
+{% block body %}
+    {{ form_start(formCategory) }}
+
+    <div class="col-md-4 mx-auto">
+    
+
+    <div class="row col-justify-content-around"></div>
+    
+        <div class="col-md-12 my-3">{{ form_row(formCategory.titre) }}</div>
+        <div class="col-md-12" my-3>{{ form_row(formCategory.motscles) }}</div>
+
+
+        <div class="col-md-12">
+        
+        <input type="submit" value="Ajouter" class="col-md-12 btn btn-dark my-5">
+        
+        </div>
+
+    
+    </div>
+
+
+
+
+    {{ form_end(formCategory) }}
+{% endblock %}
